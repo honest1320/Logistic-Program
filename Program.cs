@@ -4,6 +4,7 @@
 **********************************************************************************************/
 
 using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -31,7 +32,7 @@ namespace LogisticProgram
 
     class Liquid : Products 
     {
-        public float liquidTonnage, liquidOriginal;
+        public float liquidTonnage, specificWeight;
     }
 
     class Gas : Products
@@ -65,11 +66,11 @@ namespace LogisticProgram
 
             Products mesafe = new Products();
 
-            Console.Write("\n\n Distance To Be Transported: "); mesafe.productDistance = Convert.ToInt64(Console.ReadLine());
+            Console.Write("\n\nDistance To Be Transported(km): "); mesafe.productDistance = Convert.ToInt64(Console.ReadLine());
 
             Console.WriteLine("\n Choose Product Type To Be Transported: ");
             Console.WriteLine("1 - Solid \n2 - Liquid \n3 - Gas \n4 - Valuables");
-            Console.Write("\nChoice:"); urunSecim = Convert.ToInt32(Console.ReadLine());
+            Console.Write("\nChoice: "); urunSecim = Convert.ToInt32(Console.ReadLine());
 
             switch (urunSecim)
             {
@@ -81,10 +82,10 @@ namespace LogisticProgram
                     solidProduct.productFactor = 1;
 
                     Console.Write("\nSolid product name: "); solidProduct.productName = Console.ReadLine();
-                    Console.Write("Solid product tonnage(tons): "); solidProduct.solidTonnage = Convert.ToInt64(Console.ReadLine());
+                    Console.Write("Solid product tonnage(kg): "); solidProduct.solidTonnage = Convert.ToInt64(Console.ReadLine());
                     Console.Write("Solid product packet volume(m3): "); solidProduct.solidVolume = Convert.ToInt64(Console.ReadLine());
                     Console.WriteLine("*********************************************************************************");
-                    Console.WriteLine("\n\nTotal Amount: {0} $", ((solidProduct.solidTonnage * solidProduct.productFactor * mesafe.productDistance) + 1000));
+                    Console.WriteLine("\n\nTotal Amount: {0} $", ((solidProduct.solidTonnage * solidProduct.productFactor * mesafe.productDistance) + 100));
                     Console.Read();
 
                     break;
@@ -96,10 +97,10 @@ namespace LogisticProgram
                     liquidProduct.productFactor = 1.25;
 
                     Console.Write("\nLiquid product name: "); liquidProduct.productName = Console.ReadLine();
-                    Console.Write("Liquid product tonnage(tons): "); liquidProduct.liquidTonnage = Convert.ToInt64(Console.ReadLine());
-                    Console.Write("Liquid product specific weight(m3): "); liquidProduct.liquidOriginal = Convert.ToInt64(Console.ReadLine());
+                    Console.Write("Liquid product tonnage(kg): "); liquidProduct.liquidTonnage = Convert.ToInt64(Console.ReadLine());
+                    Console.Write("Liquid product specific weight(N/m3): "); liquidProduct.specificWeight = Convert.ToInt64(Console.ReadLine());
                     Console.WriteLine("*********************************************************************************");
-                    Console.WriteLine("\n\nTotal Amount: {0} $", (liquidProduct.liquidOriginal * liquidProduct.productFactor * mesafe.productDistance));
+                    Console.WriteLine("\n\nTotal Amount: {0} $", (liquidProduct.specificWeight * liquidProduct.productFactor * mesafe.productDistance));
                     Console.Read();
 
                     break;
@@ -114,7 +115,7 @@ namespace LogisticProgram
                     Console.Write("Gas product volume(m3): "); gasProducts.gasVolume = Convert.ToInt64(Console.ReadLine());
                     Console.Write("Gas type: "); gasProducts.gasType = Convert.ToInt64(Console.ReadLine());
                     Console.WriteLine("*********************************************************************************");
-                    Console.WriteLine("\n\nTotal Amount: {0} $", ((gasProducts.gasVolume * gasProducts.productFactor * mesafe.productDistance) + 4000));
+                    Console.WriteLine("\n\nTotal Amount: {0} $", ((gasProducts.gasVolume * gasProducts.productFactor * mesafe.productDistance) + 100));
                     Console.Read();
 
                     break;
@@ -127,7 +128,7 @@ namespace LogisticProgram
 
                     Console.Write("\nValuables name: "); valuables.productName = Console.ReadLine();
                     Console.Write("Valuables volume(m3): "); valuables.valuablesVolume = Convert.ToInt64(Console.ReadLine());
-                    Console.Write("Valuables tonnage(tons): "); valuables.valuablesTonnage = Convert.ToInt64(Console.ReadLine());
+                    Console.Write("Valuables tonnage(kg): "); valuables.valuablesTonnage = Convert.ToInt64(Console.ReadLine());
                     Console.Write("Valuables quantity: "); valuables.valuablesQuantity = Convert.ToInt64(Console.ReadLine());
                     Console.Write("Valuables volume per quantity: "); valuables.valuablesQuantityWeight = Convert.ToInt64(Console.ReadLine());
                     Console.WriteLine("*********************************************************************************");
