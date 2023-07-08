@@ -1,5 +1,5 @@
-﻿/******************************************************************************************                                                                                      
-                        NAME....: HONEST TEMU                                                                              
+/******************************************************************************************                                                                                      
+                        NAME....: HONEST ALBERT TEMU                                                                              
                                                                                           
 **********************************************************************************************/
 
@@ -9,41 +9,41 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace odev2
+namespace LogisticProgram
 {
-    class MusteriBilgisi
+    class CustomerInfo
     {
-        public string musteriIsim, musteriAdres, musteriEposta, musteriWeb, musteriTarih;
-        public long musteriTel, musteriFax, musteriVergi;
+        public string customerName, customerAdres, customerMail, customerWeb, customerDate;
+        public long customerTel, customerFax, customerTax;
     }
 
-    class Urunler // Kalıtımın yapılacağı ana sınıf oluşturuldu.
+    class Products 
     {
-        public string urunIsim;
-        public long urunMesafe;
-        public double urunCarpani;
+        public string productName;
+        public long productDistance;
+        public double productFactor;
     }
 
-    class Kati : Urunler // Ana sınıftan kalıtılan katı yavru sınıfı oluşturuldu.
+    class Solid : Products 
     {
-        public float katiTonaj, katiHacim;
+        public float solidTonnage, solidVolume;
     }
 
-    class Sivi : Urunler // Ana sınıftan kalıtılan sıvı yavru sınıfı oluşturuldu.
+    class Liquid : Products 
     {
-        public float siviTonaj, siviOzgun;
+        public float liquidTonnage, liquidOriginal;
     }
 
-    class Gaz : Urunler // Ana sınıftan kalıtılan gaz yavru sınıfı oluşturuldu.
+    class Gas : Products
     {
-        public long gazTipi;
-        public float gazHacim;
+        public long gasType;
+        public float gasVolume;
     }
 
-    class DegerliUrun : Urunler // Ana sınıftan kalıtılan değerli ürün yavru sınıfı oluşturuldu.
+    class Valuables : Products
     {
-        public long degerliAdedi;
-        public float degerliHacim, degerliTonaj, degerliAdetAgirlik;
+        public long valuablesQuantity;
+        public float valuablesVolume, valuablesTonnage, valuablesQuantityWeight;
     }
 
     class Program
@@ -52,96 +52,96 @@ namespace odev2
 
         static void Main(string[] args)
         {
-            MusteriBilgisi musteri = new MusteriBilgisi(); // Müşteri bilgilerinin girilmesi sağlandı.
+            CustomerInfo customer = new CustomerInfo(); 
 
-            Console.Write("Müşteri Adı...:"); musteri.musteriIsim = Console.ReadLine();
-            Console.Write("Adresi........:"); musteri.musteriAdres = Console.ReadLine();
-            Console.Write("Telefonu......:"); musteri.musteriTel = Convert.ToInt64(Console.ReadLine());
-            Console.Write("Fax...........:"); musteri.musteriFax = Convert.ToInt64(Console.ReadLine());
-            Console.Write("Mail..........:"); musteri.musteriEposta = Console.ReadLine();
-            Console.Write("Web Adresi....:"); musteri.musteriWeb = Console.ReadLine();
-            Console.Write("Vergi No......:"); musteri.musteriVergi = Convert.ToInt64(Console.ReadLine());
-            Console.Write("Sipariş Tarihi:"); musteri.musteriTarih = Console.ReadLine();
+            Console.Write("Customer Name...:"); customer.customerName = Console.ReadLine();
+            Console.Write("Address.........:"); customer.customerAdres = Console.ReadLine();
+            Console.Write("Telephone.......:"); customer.customerTel = Convert.ToInt64(Console.ReadLine());
+            Console.Write("Fax.............:"); customer.customerFax = Convert.ToInt64(Console.ReadLine());
+            Console.Write("Mail............:"); customer.customerMail = Console.ReadLine();
+            Console.Write("Web Address.....:"); customer.customerWeb = Console.ReadLine();
+            Console.Write("Tax No. ........:"); customer.customerTax = Convert.ToInt64(Console.ReadLine());
+            Console.Write("Order Date......:"); customer.customerDate = Console.ReadLine();
 
-            Urunler mesafe = new Urunler();
+            Products mesafe = new Products();
 
-            Console.Write("\nTaşınacak Mesafe:"); mesafe.urunMesafe = Convert.ToInt64(Console.ReadLine());
+            Console.Write("\n\n Distance To Be Transported: "); mesafe.productDistance = Convert.ToInt64(Console.ReadLine());
 
-            Console.WriteLine("\nTaşınacak ürünün cinsini seçiniz:");
-            Console.WriteLine("1 - Katı\n2 - Sıvı\n3 - Gaz\n4 - Değerli Ürün");
-            Console.Write("\nSeçiminiz:"); urunSecim = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("\n Choose Product Type To Be Transported: ");
+            Console.WriteLine("1 - Solid \n2 - Liquid \n3 - Gas \n4 - Valuables");
+            Console.Write("\nChoice:"); urunSecim = Convert.ToInt32(Console.ReadLine());
 
             switch (urunSecim)
             {
 
-                case 1: // Taşınacak katı ürünün toplam tutarı hesaplandı.
+                case 1: // Calculation of solids to be transported
 
-                    Kati urunKati = new Kati();
+                    Solid solidProduct = new Solid();
 
-                    urunKati.urunCarpani = 1;
+                    solidProduct.productFactor = 1;
 
-                    Console.Write("\nKatı ürünün adı........:"); urunKati.urunIsim = Console.ReadLine();
-                    Console.Write("Katı ürünün tonajı.....:"); urunKati.katiTonaj = Convert.ToInt64(Console.ReadLine());
-                    Console.Write("Katı ürünün paket hacmi:"); urunKati.katiHacim = Convert.ToInt64(Console.ReadLine());
+                    Console.Write("\nSolid product name: "); solidProduct.productName = Console.ReadLine();
+                    Console.Write("Solid product tonnage(tons): "); solidProduct.solidTonnage = Convert.ToInt64(Console.ReadLine());
+                    Console.Write("Solid product packet volume(m3): "); solidProduct.solidVolume = Convert.ToInt64(Console.ReadLine());
                     Console.WriteLine("*********************************************************************************");
-                    Console.WriteLine("\n\aToplam Tutar: {0} $", ((urunKati.katiTonaj * urunKati.urunCarpani * mesafe.urunMesafe) + 1000));
+                    Console.WriteLine("\n\nTotal Amount: {0} $", ((solidProduct.solidTonnage * solidProduct.productFactor * mesafe.productDistance) + 1000));
                     Console.Read();
 
                     break;
 
-                case 2: // Taşınacak sıvı ürünün toplam tutarı hesaplandı.
+                case 2: // Calculation of liquids to be transported
 
-                    Sivi urunSivi = new Sivi();
+                    Liquid liquidProduct = new Liquid();
 
-                    urunSivi.urunCarpani = 1.25;
+                    liquidProduct.productFactor = 1.25;
 
-                    Console.Write("\nSıvı ürünün adı:"); urunSivi.urunIsim = Console.ReadLine();
-                    Console.Write("Sıvı ürünün tonajı:"); urunSivi.siviTonaj = Convert.ToInt64(Console.ReadLine());
-                    Console.Write("Sıvı ürünün özgül ağırlığı:"); urunSivi.siviOzgun = Convert.ToInt64(Console.ReadLine());
+                    Console.Write("\nLiquid product name: "); liquidProduct.productName = Console.ReadLine();
+                    Console.Write("Liquid product tonnage(tons): "); liquidProduct.liquidTonnage = Convert.ToInt64(Console.ReadLine());
+                    Console.Write("Liquid product specific weight(m3): "); liquidProduct.liquidOriginal = Convert.ToInt64(Console.ReadLine());
                     Console.WriteLine("*********************************************************************************");
-                    Console.WriteLine("\n\aToplam Tutar: {0} $", (urunSivi.siviOzgun * urunSivi.urunCarpani * mesafe.urunMesafe));
+                    Console.WriteLine("\n\nTotal Amount: {0} $", (liquidProduct.liquidOriginal * liquidProduct.productFactor * mesafe.productDistance));
                     Console.Read();
 
                     break;
 
-                case 3: // Taşınacak gaz ürünün toplam tutarı hesaplandı.
+                case 3: // Calculation of gases to be transported
 
-                    Gaz urunGaz = new Gaz();
+                    Gas gasProducts = new Gas();
 
-                    urunGaz.urunCarpani = 1.1;
+                    gasProducts.productFactor = 1.1;
 
-                    Console.Write("\nGaz ürünün adı:"); urunGaz.urunIsim = Console.ReadLine();
-                    Console.Write("Gaz ürünün hacmi:"); urunGaz.gazHacim = Convert.ToInt64(Console.ReadLine());
-                    Console.Write("Gaz ürünün tipi:"); urunGaz.gazTipi = Convert.ToInt64(Console.ReadLine());
+                    Console.Write("\nGas product name: "); gasProducts.productName = Console.ReadLine();
+                    Console.Write("Gas product volume(m3): "); gasProducts.gasVolume = Convert.ToInt64(Console.ReadLine());
+                    Console.Write("Gas type: "); gasProducts.gasType = Convert.ToInt64(Console.ReadLine());
                     Console.WriteLine("*********************************************************************************");
-                    Console.WriteLine("\n\aToplam Tutar: {0} $", ((urunGaz.gazHacim * urunGaz.urunCarpani * mesafe.urunMesafe) + 4000));
+                    Console.WriteLine("\n\nTotal Amount: {0} $", ((gasProducts.gasVolume * gasProducts.productFactor * mesafe.productDistance) + 4000));
                     Console.Read();
 
                     break;
 
-                case 4: // Taşınacak değerli ürünün toplam tutarı hesaplandı.
+                case 4: // Calculation of valuables to be transported
 
-                    DegerliUrun urunDegerli = new DegerliUrun();
+                    Valuables valuables = new Valuables();
 
-                    urunDegerli.urunCarpani = 1.5;
+                    valuables.productFactor = 1.5;
 
-                    Console.Write("\nDeğerli ürünün adı:"); urunDegerli.urunIsim = Console.ReadLine();
-                    Console.Write("Değerli ürünün hacmi:"); urunDegerli.degerliHacim = Convert.ToInt64(Console.ReadLine());
-                    Console.Write("Değerli ürünün tonajı:"); urunDegerli.degerliTonaj = Convert.ToInt64(Console.ReadLine());
-                    Console.Write("Değerli ürünün adedi:"); urunDegerli.degerliAdedi = Convert.ToInt64(Console.ReadLine());
-                    Console.Write("Değerli ürünün adet ağırlığı:"); urunDegerli.degerliAdetAgirlik = Convert.ToInt64(Console.ReadLine());
+                    Console.Write("\nValuables name: "); valuables.productName = Console.ReadLine();
+                    Console.Write("Valuables volume(m3): "); valuables.valuablesVolume = Convert.ToInt64(Console.ReadLine());
+                    Console.Write("Valuables tonnage(tons): "); valuables.valuablesTonnage = Convert.ToInt64(Console.ReadLine());
+                    Console.Write("Valuables quantity: "); valuables.valuablesQuantity = Convert.ToInt64(Console.ReadLine());
+                    Console.Write("Valuables volume per quantity: "); valuables.valuablesQuantityWeight = Convert.ToInt64(Console.ReadLine());
                     Console.WriteLine("*********************************************************************************");
 
-                    if (urunDegerli.degerliTonaj / urunDegerli.degerliHacim >= 0.5) // 0.5 koşulu sağlayan ve sağlamayan ürünler için farklı fiyatlandırma yapıldı.
-                        Console.WriteLine("\n\aToplam Tutar: {0} $", ((urunDegerli.degerliTonaj * urunDegerli.urunCarpani) + ((urunDegerli.degerliHacim * urunDegerli.urunCarpani)) / 2 + (mesafe.urunMesafe * 1.5)));
+                    if (valuables.valuablesTonnage / valuables.valuablesVolume >= 0.5) // Products that meet and dont meet the 0.5 condition are priced differently.
+                        Console.WriteLine("\n\nTotal Amount: {0} $", ((valuables.valuablesTonnage * valuables.productFactor) + ((valuables.valuablesVolume * valuables.productFactor)) / 2 + (mesafe.productDistance * 1.5)));
                     else
-                        Console.WriteLine("\n\aToplam Tutar: {0} $", ((urunDegerli.degerliHacim * urunDegerli.urunCarpani) + (mesafe.urunMesafe * 2)));
+                        Console.WriteLine("\n\nTotal Amount: {0} $", ((valuables.valuablesVolume * valuables.productFactor) + (mesafe.productDistance * 2)));
 
                     break;
 
                 default:
 
-                    Console.WriteLine("Hatalı bir giriş yaptınız!\a");
+                    Console.WriteLine("Wrong Selection Made!\a");
 
                     break;
 
